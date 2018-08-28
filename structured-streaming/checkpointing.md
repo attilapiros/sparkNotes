@@ -106,7 +106,7 @@ In case of failover commit log is used to identify from which batch we should re
   }
 ```
 
-So listing all files, parsing filenames to batchIds, sorting them and reversing the list finally giving back the first tuple of batchId with its metadata. 
+So listing all files from the commits directory, parsing filenames to batchIds, sorting them and reversing the list finally giving back the first tuple of batchId with its metadata. 
 
 
 ### The offsets directory
