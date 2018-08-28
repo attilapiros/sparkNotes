@@ -88,6 +88,27 @@ class CommitLog(sparkSession: SparkSession, path: String)
   extends HDFSMetadataLog[String](sparkSession, path)
 ```
 
+In case of failover commit log is used to identify from which batch we should restart query execution:
+
+```Scala
+  override def getLatest(): Option[(Long, T)] = {
+    val batchIds = fileManager.list(metadataPath, batchFilesFilter)
+      .map(f => pathToBatchId(f.getPath))
+      .sorted
+      .reverse
+    for (batchId <- batchIds) {
+      val batch = get(batchId)
+      if (batch.isDefined) {
+        return Some((batchId, batch.get))
+      }
+    }
+    None
+  }
+```
+
+So listing all files, parsing filenames to batchIds, sorting them and reversing the list finally giving back the first tuple of batchId with its metadata. 
+
+
 ### The offsets directory
 
 See org.apache.spark.sql.execution.streaming.StreamExecution#offsetLog 
