@@ -5,7 +5,7 @@
 
 > "In case of a failure or intentional shutdown, you can recover the previous progress and state of a previous query, and continue where it left off. This is done using checkpointing and write ahead logs. You can configure a query with a checkpoint location, and the query will save all the progress information (i.e. range of offsets processed in each trigger) and the running aggregates (e.g. word counts in the quick example) to the checkpoint location. This checkpoint location has to be a path in an HDFS compatible file system, and can be set as an option in the DataStreamWriter when starting a query."
 
-> ~ Structured streaming programming guide
+~ Structured streaming programming guide
 
 Example for specifying the checkpoint location:
 
