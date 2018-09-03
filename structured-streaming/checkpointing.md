@@ -1,4 +1,4 @@
-# Checkpointing
+# Checkpointing (Spark 2.4.0)
 
 ### Recovering from Failures with Checkpointing 
 
