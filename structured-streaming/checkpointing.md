@@ -40,6 +40,15 @@ aggDF
     - 4/
       - 1.delta
 - sources/
+  - 0
+    - 0  
+    - 1
+  - 1
+    - 0  
+    - 1
+  - 2
+    - 0
+    - 1
 - metadata
 
 ### The commits directory
