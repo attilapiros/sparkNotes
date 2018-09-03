@@ -371,7 +371,7 @@ And there is another config spark.sql.streaming.stateStore.minDeltasForSnapshot 
 
 ### The sources directory
 
-For each source a new subdirectory is created with the source ID (a long, starting from 0, follows the order of streaming relations within the logical plan). 
+For each source a new subdirectory is created with the source ID (it is a long, starting from 0, follows the ordering of sources used in the logical plan). 
 
 Here HDFSMetadataLog is written, which functionality depends on the source.
 
