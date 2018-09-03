@@ -381,7 +381,7 @@ In case of Kafka only the initial offests (for 0 batch) are written here (which 
 
 #### File source
 
-In case of file source a FileStreamSourceLog instance (derived from HDFSMetadataLog) is created. Which maps offsets to file names (along with the file modification time and the batch ID), see org.apache.spark.sql.execution.streaming.FileStreamSource#getBatch(). Basically for each offset (which is for file source the same with the batch ID) a file with name of the batch ID is created:
+In case of file source a FileStreamSourceLog instance (derived from HDFSMetadataLog) is created. Which maps offsets to file names (along with the file modification time and the batch ID), see org.apache.spark.sql.execution.streaming.FileStreamSource#getBatch(). Basically for each offset (which is for a file source the exact same number as the batch ID) a file is created (filename is the batch ID/offset):
 
 Example content (filename: "3")
 
