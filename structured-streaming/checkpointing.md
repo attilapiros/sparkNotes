@@ -39,8 +39,8 @@ aggDF
       - 1.delta
     - 4/
       - 1.delta
+- sources/
 - metadata
-
 
 ### The commits directory
 
@@ -369,7 +369,35 @@ Its main config is spark.sql.streaming.stateStore.maintenanceInterval (default 6
 
 And there is another config spark.sql.streaming.stateStore.minDeltasForSnapshot (default 10) used at maintenance (snapshot file generation).
 
+### The sources directory
 
+For each source a new subdirectory is created with the source ID (a long, starting from 0, follows the order of streaming relations within the logical plan). 
+
+Here HDFSMetadataLog is written, which functionality depends on the source.
+
+#### Kafka
+
+In case of Kafka only the initial offests (for 0 batch) are written here (which can be configured by the streaming query option "startingOffsets" and can be 'earliest' or 'latest' or a specific offset range represented in json.
+
+#### File source
+
+In case of file source a FileStreamSourceLog instance (derived from HDFSMetadataLog) is created. Which maps offsets to file names (along with the file modification time and the batch ID), see org.apache.spark.sql.execution.streaming.FileStreamSource#getBatch(). Basically for each offset (which is for file source the same with the batch ID) a file with name of the batch ID is created:
+
+Example content (filename: "3")
+
+```
+v1
+{"path":"/a/b/3","timestamp":1480730950000,"batchId":3}
+```
+
+Moreover there is a compaction interval after which the previous batches are compacted to one file, example: 
+
+```
+v1
+{"path":"/a/b/0","timestamp":1480730949000,"batchId":0}
+{"path":"/a/b/1","timestamp":1480730950000,"batchId":1}
+{"path":"/a/b/2","timestamp":1480730950000,"batchId":2}
+```
 
 ### The metadata file 
 
