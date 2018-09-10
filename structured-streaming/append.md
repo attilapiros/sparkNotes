@@ -6,7 +6,7 @@
 
 So supported queries:
 
-- Queries with aggregation. **Only when** the aggregation is on event-time with watermark => withWatermark called before the aggregation using the same column.
+- Queries with aggregation. **Only when** the aggregation is on event-time of the watermark (or a window on the event-time) => withWatermark called before the aggregation using the same column.
 
   - Example: [groupBy Streaming Aggregation with Append Output Mode](https://jaceklaskowski.gitbooks.io/spark-structured-streaming/spark-sql-streaming-demo-groupBy-aggregation-append.html).
 
